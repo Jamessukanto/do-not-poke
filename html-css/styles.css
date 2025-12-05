@@ -247,7 +247,7 @@ main {
   background-color: var(--color-transparent);
   width: 136px;
   height: 84px;
-  cursor: url('cursor-poke.cur'), pointer;
+  cursor: url('/cursor-poke.cur'), pointer;
 }
 
 .content-section {
