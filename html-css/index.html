@@ -1,0 +1,150 @@
+<!-- Q1: Fill in your HTML here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessment - HTML & CSS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="center-div.css">
+</head>
+<body>
+  <!-- ------------------ Header ------------------ -->
+  <header>
+    <div class="parent">
+    <!-- <div class="header-content parent"> -->
+      <div>
+        <h1>Do not poke</h1>
+      </div>
+    </div>
+  </header>
+  <!-- ------------------ Navigation Bar ------------------ -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="mailto:jamessukanto@gmail.com">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- ------------------ Main Content ------------------ -->
+  <main>
+    <div class="hero">
+      <div class="hero-section">
+        <img src="ear.png" alt="Ear illustration" class="hero-image">
+        <button class="btn-overlay"></button>
+      </div>
+
+      <div class="hero-text">
+        <p id="poke-message">Nothing to do here...</p>
+      </div>
+    </div>
+
+    <section class="content-section">
+      <h2>Heya!</h2>
+      <p>
+        James here - this was a just-for-fun build!
+        Poke away, and check out my other works. Thank you!
+      </p>
+      <div class="button-group">
+        <a 
+          href="https://jamessukanto.github.io/design_archive/index.html"
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-primary">View Portfolio</a>
+        <a 
+          href="https://github.com/Jamessukanto"
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-secondary">View Github</a>
+      </div>
+    </section>
+  </main>
+  <!-- ------------------ Footer ------------------ -->
+  <footer>
+    <p>&copy; <span id="current-year">2025</span> Monkey on Elephant.</p>
+  </footer>
+
+  <!-- ------------------ Inline JS ------------------ -->
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    const messages = [
+      "It says: Do not poke!",
+      "Very mature...",
+      "Security!!",
+      "Stop it.",
+      "Hey, cut it out!",
+      "It hurts...",
+      "Ouch!",
+      "Seriously?",
+      "Okay, that's enough.",
+      "Try the other buttons instead.",
+      "This is getting old.",
+      "Last warning!",
+      "Interesting choice. Very bold. Very wrong.",
+      "Look at you, living dangerously for no reason.",
+      "Some people learn. Some people poke me.",
+      "At this point I'm just taking notes.",
+      "This button isn't a personality test, but you're failing it anyway.",
+      "If curiosity kills cats, you're on your ninth life.",
+      "Congratulations, you found the world's most pointless rebellion.",
+      "Do you click crosswalk buttons like this too?",
+      "You need therapy.",
+      "Ow. Personal space? Ever heard of it?",
+      "One more poke and I'm calling the police.",
+      "Hullo? Police???",
+      "I'm being assaulted!",
+      "Wow, bold. Harassing an ear.",
+      "I'm an ear, not a doorbell.",
+      "Have you considered... not touching me?",
+      "Why are you like this? Why?",
+      "I did not consent to this.",
+      "Bruh. I'm an ear, not a button. Stop.",
+      "You know what? I think I'm starting to like this.",
+      "Yes.",
+      "Poke away.",
+      "Poke into oblivion, you sick monster.",
+      "Huh?",
+      "Did you say something? Cus I can't hear.",
+      "Please... Please stop.",
+    ];
+
+    const pokeButton = document.querySelector('.btn-overlay');
+    const messageElement = document.getElementById('poke-message');
+    const heroImage = document.querySelector('.hero-image');
+    let currentMessageIndex = -1;
+    let isPressed = false;
+
+    function setImageState(pressed) {
+      heroImage.src = pressed ? 'ear_pressed.png' : 'ear.png';
+      isPressed = pressed;
+    }
+
+    pokeButton.addEventListener('pointerdown', function(e) {
+      e.preventDefault();
+      setImageState(true);
+    });
+
+    document.addEventListener('pointerup', function() {
+      if (isPressed) {
+        setImageState(false);
+      }
+    });
+
+    // Rotate through messages on click
+    pokeButton.addEventListener('click', function() {
+      currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+      messageElement.textContent = messages[currentMessageIndex];
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+

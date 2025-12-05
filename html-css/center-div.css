@@ -1,0 +1,17 @@
+/* Q2: Center a div using Flexbox */
+.parent {
+  
+  /* Add your Flexbox centering code here */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: var(--spacing-md) var(--spacing-sm);
+}
+
+/* Reduce gap between header and content on smaller screens */
+@media (max-width: 768px) {
+  .parent {
+    margin: var(--spacing-xxs) var(--spacing-sm);
+  }
+}
