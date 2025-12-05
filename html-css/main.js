@@ -2,9 +2,6 @@
 import earImg from './ear.png';
 import earPressedImg from './ear_pressed.png';
 
-// Set current year
-document.getElementById('current-year').textContent = new Date().getFullYear();
-
 const messages = [
   "It says: Do not poke!",
   "Very mature...",
@@ -46,34 +43,81 @@ const messages = [
   "Please... Please stop.",
 ];
 
-const pokeButton = document.querySelector('.btn-overlay');
-const messageElement = document.getElementById('poke-message');
-const heroImage = document.querySelector('.hero-image');
 let currentMessageIndex = -1;
 let isPressed = false;
 
-// Set initial image
-heroImage.src = earImg;
-
 function setImageState(pressed) {
-  heroImage.src = pressed ? earPressedImg : earImg;
-  isPressed = pressed;
+  const heroImage = document.querySelector('.hero-image');
+  if (heroImage) {
+    heroImage.src = pressed ? earPressedImg : earImg;
+    isPressed = pressed;
+  }
 }
 
-pokeButton.addEventListener('pointerdown', function(e) {
-  e.preventDefault();
-  setImageState(true);
-});
-
-document.addEventListener('pointerup', function() {
-  if (isPressed) {
-    setImageState(false);
+function initPokeButton() {
+  const pokeButton = document.querySelector('.btn-overlay');
+  const messageElement = document.getElementById('poke-message');
+  const heroImage = document.querySelector('.hero-image');
+  
+  if (!pokeButton || !messageElement || !heroImage) {
+    return;
   }
-});
 
-// Rotate through messages on click
-pokeButton.addEventListener('click', function() {
-  currentMessageIndex = (currentMessageIndex + 1) % messages.length;
-  messageElement.textContent = messages[currentMessageIndex];
-});
+  // Set initial image
+  heroImage.src = earImg;
+
+  // Prevent context menu on image (mobile long press)
+  heroImage.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  pokeButton.addEventListener('pointerdown', function(e) {
+    e.preventDefault();
+    setImageState(true);
+  });
+
+  document.addEventListener('pointerup', function() {
+    if (isPressed) {
+      setImageState(false);
+    }
+  });
+
+  // Rotate through messages on click
+  pokeButton.addEventListener('click', function() {
+    currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+    messageElement.textContent = messages[currentMessageIndex];
+  });
+
+  // Prevent context menu on long press (mobile)
+  pokeButton.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // Prevent touch callout (iOS Safari image preview menu)
+  pokeButton.addEventListener('touchstart', function(e) {
+    // Don't prevent default here - let pointer events handle it
+    // This just prevents the callout menu
+  }, { passive: true });
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() {
+    // Set current year
+    const yearElement = document.getElementById('current-year');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
+    initPokeButton();
+  });
+} else {
+  // DOM is already ready
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+  initPokeButton();
+}
 

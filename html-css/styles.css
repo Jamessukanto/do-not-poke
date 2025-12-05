@@ -7,6 +7,7 @@
   /* Colors */
   --color-black: #000000;
   --color-white: #ffffff;
+  --color-transparent: transparent;
   --color-gray-light: #f5f5f5;
   --color-gray-bg: #f9f9f9;
   --color-gray-line: #efefef;
@@ -72,6 +73,8 @@
 html {
   font-size: var(--font-size-base);
   scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -90,6 +93,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
   /* Offset for fixed navigation bar */
   padding-top: var(--nav-height);
 }
@@ -206,6 +211,7 @@ main {
   max-width: var(--max-width);
   margin: 0 auto;
   padding-top: 0;
+  box-sizing: border-box;
 }
 
 .hero {
@@ -233,6 +239,11 @@ main {
   width: 280px;
   height: auto;
   display: block;
+  /* Prevent mobile touch callout and context menu */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none; /* Let the overlay button handle all interactions */
 }
 
 .btn-overlay {
@@ -248,6 +259,12 @@ main {
   width: 136px;
   height: 84px;
   cursor: url('/cursor-poke.cur'), pointer;
+  /* Prevent mobile touch highlights and context menu */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .content-section {
