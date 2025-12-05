@@ -351,11 +351,6 @@ main {
   box-shadow: none;
 }
 
-.btn:focus {
-  outline: var(--border-width) solid var(--color-black);
-  outline-offset: var(--outline-offset);
-}
-
 /* ============================================
    Footer
    ============================================ */
